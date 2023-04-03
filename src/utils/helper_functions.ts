@@ -23,16 +23,6 @@ class HelperFunctions {
         return response;
     }
 
-    validateDomain(domain: string) {
-        try {
-            new URL(domain);
-            return true;
-        }
-        catch (err) {
-            return false;
-        }
-    }
-
 }
 
 export default new HelperFunctions();
