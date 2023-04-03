@@ -15,7 +15,7 @@ class logger implements Logger {
     }
 
     verboseEnd(module: string, func: string, params?: any): void {
-        console.log(chalk.green(`${module} - function ${func} has returned with result: ${params}`))
+        console.log(chalk.green(`${module} - function ${func} has returned with result:`))
     }
     
     error(module: string, func: string, err: any): void {

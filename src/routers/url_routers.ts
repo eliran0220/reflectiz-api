@@ -10,7 +10,6 @@ export class UrlRouters {
     public setRoutes() {
       this.router.post('/insert', errorWrapper(urlController.insertDomain));
       this.router.get('/scan',errorWrapper(urlController.scanDomains))
-      this.router.get('/getall',errorWrapper(urlController.getAll));
       this.router.get('/:domain',errorWrapper(urlController.getUrl));
     }
   }
