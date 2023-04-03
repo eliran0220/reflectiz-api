@@ -31,12 +31,17 @@ var _domains: DOMAIN_DTO[];
         let information;
         let response;
         try {
-            information = await sql_db.getDomainInformation(domain)
-            if (information.length === 0) {
-                information = await sql_db.insertDomain(domain);
-                response  = helperFunctions.OkResponseBuilder('Domain not found, added for later scan. Please check this domain later',200,information);
+            const is_valid = helperFunctions.validateDomain(domain);
+            if (!is_valid) {
+                response = helperFunctions.OkResponseBuilder(`${domain} is not a valid domain!`,200);
             } else {
-                response = helperFunctions.OkResponseBuilder(`${domain} found`,200,information as DOMAIN_DTO);
+                information = await sql_db.getDomainInformation(domain)
+                if (information.length === 0) {
+                    information = await sql_db.insertDomain(domain);
+                    response  = helperFunctions.OkResponseBuilder('Domain not found, added for later scan. Please check this domain later',200,information);
+                } else {
+                    response = helperFunctions.OkResponseBuilder(`${domain} found`,200,information as DOMAIN_DTO);
+                }
             }
             return response;
         } catch (err) {
